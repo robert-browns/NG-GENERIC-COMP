@@ -1,0 +1,5 @@
+CREATE src/app/shared/shared.component.html (25 bytes)
+CREATE src/app/shared/shared.component.spec.ts (628 bytes)
+CREATE src/app/shared/shared.component.ts (269 bytes)
+CREATE src/app/shared/shared.component.css (0 bytes)
+UPDATE src/app/app.module.ts (2025 bytes)

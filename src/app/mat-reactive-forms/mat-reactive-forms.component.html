@@ -1,0 +1,67 @@
+<form [formGroup]="matForm" (ngSubmit)="onMatSubmit()">
+  <div>
+    <mat-form-field hintLabel="First name">
+      <input matInput #input maxlength="10" placeholder="Enter first name" formControlName="firstName">
+      <!-- <mat-error *ngIf="firstName.invalid">{{getErrorMessage()}}</mat-error> -->
+      <mat-error>
+        <span class="animated slideInDown slower" *ngIf="isErrorExistsForm('firstName')">
+          {{ getErrorMessage("firstName") }}
+        </span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field hintLabel="Last Name" appearance="legacy">
+      <mat-label>Last Name</mat-label>
+      <input matInput #input maxlength="10" placeholder="Enter last name" formControlName="lastName">
+      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div formGroupName="address">
+    <h2>Address</h2>
+    <div>
+      <mat-form-field hintLabel="line1" appearance="standard">
+        <mat-label>Line1</mat-label>
+        <input matInput #input maxlength="10" placeholder="Enter line1" formControlName="line1">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field hintLabel="line2" appearance="fill">
+        <mat-label>Line2</mat-label>
+        <input matInput #input maxlength="10" placeholder="Enter line2" formControlName="line2">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field hintLabel="line3" appearance="outline">
+        <mat-label>Line3</mat-label>
+        <input matInput #input maxlength="10" placeholder="Enter line3" formControlName="line3">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      </mat-form-field>
+    </div>
+    <div>
+      <!-- <mat-form-field hintLabel="city" appearance="outline">
+        <mat-label>City</mat-label>
+        <input matInput #input maxlength="10" placeholder="Enter city name" formControlName="city">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      </mat-form-field> -->
+      <!-- <app-smnx-form-control label="city" [control]="matForm.get('city')" appearance="fill">
+        <input matInput formControlName="city" />
+      </app-smnx-form-control> -->
+    </div>
+    <div>
+      <mat-form-field hintLabel="zip" appearance="outline">
+        <mat-label>Zip</mat-label>
+        <input matInput #input maxlength="10" placeholder="Enter zip" formControlName="zip">
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+
+  <span>Result:</span>
+  <p id="matResult"></p>
+</form>

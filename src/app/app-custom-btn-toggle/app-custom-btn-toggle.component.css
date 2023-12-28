@@ -1,0 +1,5 @@
+button.pressed {
+    background-color: rgb(226, 70, 70);
+    color: #fff;
+    border: 10px;
+}

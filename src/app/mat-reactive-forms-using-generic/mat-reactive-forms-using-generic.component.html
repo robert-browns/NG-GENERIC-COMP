@@ -1,0 +1,55 @@
+<form [formGroup]="matForm2" (ngSubmit)="onMatSubmit()">
+
+  <!-- <h3 for="">Using app-custom-textbox: </h3>
+  <div>
+    <app-custom-textbox hintLabel='First name' maxlength="15" placeholder="Enter a first name"
+      formControlName="firstName" [formControl]="matForm2.get('firstName')"></app-custom-textbox>
+  </div>
+
+  <div>
+    <app-custom-textbox hintLabel='Last name' maxlength="15" placeholder="Enter a last name"
+      [formControl]="matForm2.get('lastName')"></app-custom-textbox>
+  </div>
+  <div>
+    <app-custom-textbox hintLabel='Email' maxlength="50" placeholder="Enter your email" fieldType="email"
+      [formControl]="matForm2.get('email')"></app-custom-textbox>
+  </div>
+  <div>
+    <app-custom-dropdown [options]="states" [placeholder]="'Select an option'" [hintLabel]="'Dropdown'"
+      [fieldName]="'dropdown'" [formControl]="matForm2.get('state')"></app-custom-dropdown>
+  </div> -->
+
+  <h3 for="">Using app-textbox-form-control: </h3>
+
+  <div>
+    <app-textbox-form-control hintLabel='First name' maxlength="15" placeholder="Enter a first name"
+      [formControl]="matForm2.get('firstName')" [showMaxlength]="true"
+      [showHintLabel]="true"></app-textbox-form-control>
+  </div>
+  <div>
+    <app-textbox-form-control hintLabel='Last name' maxlength="15" placeholder="Enter a last name"
+      [formControl]="matForm2.get('lastName')"></app-textbox-form-control>
+  </div>
+  <!-- <div>
+    <app-custom-dropdown [options]="states" [placeholder]="'Select an option'" [hintLabel]="'Dropdown'"
+      [fieldName]="'dropdown'" [formControl]="matForm2.get('state')"></app-custom-dropdown>
+  </div> -->
+  <div>
+    <app-textbox-form-control hintLabel='Email' maxlength="50" placeholder="Enter your email" fieldType="email"
+      [formControl]="matForm2.get('email')"></app-textbox-form-control>
+  </div>
+  <div>
+    <app-textbox-form-control hintLabel='Password' maxlength="50" placeholder="Enter password" fieldType="password"
+      [formControl]="matForm2.get('password')">
+    </app-textbox-form-control>
+
+  </div>
+
+
+  <div>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <br>
+    <span>Result:</span>
+    <p id="matResult"></p>
+  </div>
+</form>

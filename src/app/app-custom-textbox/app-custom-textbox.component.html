@@ -1,0 +1,10 @@
+<mat-form-field [hintLabel]="hintLabel" appearance="outline">
+  <mat-label>{{hintLabel}}</mat-label>
+  <input matInput #input [attr.maxlength]="maxlength" [placeholder]="placeholder" [value]="value" [disabled]="disabled"
+    (input)="onChange($event)" (blur)="touched()" [formControl]="formControl">
+  <mat-hint align="end">{{input.value?.length || 0}}/{{maxlength}}</mat-hint>
+  <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+</mat-form-field>
+
+
+<!-- <input type="text" [value]="value" [disabled]="disabled" (input)="onChange($event)" (blur)="touched()"> -->

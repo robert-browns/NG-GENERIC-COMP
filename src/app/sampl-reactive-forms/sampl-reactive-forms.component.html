@@ -1,0 +1,49 @@
+<form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+  <label for="firstName">First Name: </label>
+  <input type="text" name="firstName" id="firstName" formControlName="firstName">
+  <br>
+  <label for="lastName">Last Name: </label>
+  <input type="text" name="lastName" id="lastName" formControlName="lastName">
+
+
+  <br>
+  <div formGroupName="address">
+    <h2>Address</h2>
+    <div>
+      <label for="line1">Line1: </label>
+      <input type="text" name="line1" id="line1" formControlName="line1">
+    </div>
+    <div>
+      <label for="line2">Line2: </label>
+      <input type="text" name="line2" id="line2" formControlName="line2">
+    </div>
+    <div>
+      <label for="line3">Line3: </label>
+      <input type="text" name="line3" id="line3" formControlName="line3">
+    </div>
+    <!-- Std dropdown -->
+    <div>
+
+      <mat-form-field>
+        <mat-label>States</mat-label>
+        <mat-select formControlName="state">
+          <mat-option *ngFor="let state of states" [value]="state.value">{{ state.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div>
+      <label for="city">city: </label>
+      <input type="text" name="city" id="city" formControlName="city">
+    </div>
+    <div>
+      <label for="zip">zip: </label>
+      <input type="number" name="zip" id="zip" formControlName="zip">
+    </div>
+  </div>
+
+  <div>Result:</div>
+  <p id="result"></p>
+
+  <button type="submit" [disabled]="!testForm.valid">Submit</button>
+</form>
