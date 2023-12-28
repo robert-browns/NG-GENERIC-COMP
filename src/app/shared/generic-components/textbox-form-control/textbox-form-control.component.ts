@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { BaseFormControlComponent } from '../base-form-control/base-form-control.component'
 
@@ -91,10 +91,6 @@ export class TextboxFormControlComponent extends BaseFormControlComponent {
         break;
     }
     return this.errorMessage;
-  }
-
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
-    super();
   }
 
 }

@@ -1,0 +1,19 @@
+<mat-form-field [hintLabel]="hintLabel" appearance="outline">
+  <mat-label>{{ hintLabel }}</mat-label>
+
+  <mat-select #select [placeholder]="placeholder" [disabled]="disabled" (selectionChange)="onChange($event)"
+    [formControl]="formControl">
+    <span *ngIf="enableSearch">
+      <ngx-mat-select-search [formControl]="searchControl" placeholderLabel="Search"
+        noEntriesFoundLabel="No Records Found!"></ngx-mat-select-search>
+    </span>
+    <span *ngIf="!overrideKeyValue">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.value">{{ option.viewValue
+        }}</mat-option></span>
+    <span *ngIf="overrideKeyValue">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.viewValue">{{ option.viewValue
+        }}</mat-option></span>
+  </mat-select>
+  <mat-hint align="end">{{ value ? 'Selected: ' + value : '' }}</mat-hint>
+  <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+</mat-form-field>

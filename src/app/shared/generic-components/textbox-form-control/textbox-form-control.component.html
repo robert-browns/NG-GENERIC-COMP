@@ -1,4 +1,4 @@
-<mat-form-field [hintLabel]="showHintLabel ? hintLabel : ''" appearance="legacy">
+<mat-form-field [hintLabel]="showHintLabel ? hintLabel : ''" appearance="outline"> <!-- legacy -->
   <mat-label>{{hintLabel}}</mat-label>
   <input matInput #input [attr.maxlength]="maxlength" [placeholder]="placeholder" [value]="value" [type]="fieldType"
     [disabled]="disabled" (input)="onChange($event)" (blur)="touched()" [formControl]="formControl">

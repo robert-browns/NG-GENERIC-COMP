@@ -1,5 +1,6 @@
 // import { Component } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
 
 // @Component({
 //   selector: 'app-base-form-control'
@@ -21,9 +22,25 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
     this.value = value;
   }
 
-  public onChange(event: Event): void {
-    const val: string = (<HTMLInputElement>event.target).value;
+  private extractValueFromInput(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
 
+  private extractValueFromMatSelect(event: MatSelectChange): string {
+    return event.value;
+  }
+
+  public onChange(event: Event | MatSelectChange): void {
+    let val: string;
+    switch (true) {
+      case (event instanceof MatSelectChange):
+        val = this.extractValueFromMatSelect(event);
+        break;
+
+      default:
+        val = this.extractValueFromInput(event);
+        break;
+    }
     this.changed(val);
   }
 

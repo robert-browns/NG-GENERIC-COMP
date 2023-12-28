@@ -1,4 +1,4 @@
-<form [formGroup]="matForm2" (ngSubmit)="onMatSubmit()">
+<form [formGroup]="matForm2" (ngSubmit)="onMatSubmit()" autocomplete="off">
 
   <!-- <h3 for="">Using app-custom-textbox: </h3>
   <div>
@@ -35,7 +35,12 @@
       [fieldName]="'dropdown'" [formControl]="matForm2.get('state')"></app-custom-dropdown>
   </div> -->
   <div>
-    <app-textbox-form-control hintLabel='Email' maxlength="50" placeholder="Enter your email" fieldType="email"
+    <smnx-dropdown-form-control [options]="states" [placeholder]="'Select an option'" [hintLabel]="'State'"
+      [fieldName]="'State'" [formControl]="matForm2.get('state')" [overrideKeyValue]="false"
+      [enableSearch]="true"></smnx-dropdown-form-control>
+  </div>
+  <div>
+    <app-textbox-form-control hintLabel='Email' maxlength=" 50" placeholder="Enter your email" fieldType="email"
       [formControl]="matForm2.get('email')"></app-textbox-form-control>
   </div>
   <div>

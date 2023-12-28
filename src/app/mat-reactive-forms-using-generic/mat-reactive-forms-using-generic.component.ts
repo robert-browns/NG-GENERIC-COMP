@@ -11,17 +11,29 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
 
   states = [
     { value: '', viewValue: '--Select a option--' },
-    { value: 'karnataka', viewValue: 'Karnataka' },
-    { value: 'bihar', viewValue: 'Bihar' },
-    { value: 'goa', viewValue: 'Goa' },
+    { value: 'KA', viewValue: 'Karnataka' },
+    { value: 'BH', viewValue: 'Bihar' },
+    { value: 'GA', viewValue: 'Goa' },
   ];
+
+  /*  Move below to Model class in separate file
+   //TODO: Create a Model of an export class with field name such as firstName, etc..
+
+   //TODO: Create a formControls using Model using Creation() fn
+
+ */
+
+  //Here, in component add below
+  // For table screens - pass the model to SelectionModel in a variable
+
+  // For Popup screens - have model created from creation() 
 
   matForm2 = this.matForm2Builder.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
-    state: [''],
+    state: ['', Validators.required],
     address: this.matForm2Builder.group({
       line1: [''],
       line2: [''],
