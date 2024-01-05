@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SamplReactiveFormsComponent } from './sampl-reactive-forms/sampl-reactive-forms.component';
 import { MatReactiveFormsComponent } from './mat-reactive-forms/mat-reactive-forms.component';
 import { MatReactiveFormsUsingGenericComponent } from './mat-reactive-forms-using-generic/mat-reactive-forms-using-generic.component';
-import { MatAutocompleteModule, MatSelectModule, MatTabsModule } from '@angular/material';
+import { MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatTabsModule } from '@angular/material';
 import { AppCustomBtnToggleComponent } from './app-custom-btn-toggle/app-custom-btn-toggle.component';
 import { AppCustomTextboxComponent } from './app-custom-textbox/app-custom-textbox.component';
 import { TextboxFormControlComponent } from './shared/generic-components/textbox-form-control/textbox-form-control.component';
@@ -26,6 +26,10 @@ import { DropdownFormControlComponent } from './shared/generic-components/dropdo
 import { AppCustomDropdownComponent } from './app-custom-dropdown/app-custom-dropdown.component';
 
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { DatepickerFormControlComponent } from './shared/generic-components/datepicker-form-control/datepicker-form-control.component';
+
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { DatetimepickerFormControlComponent } from './shared/generic-components/datetimepicker-form-control/datetimepicker-form-control.component';
 
 
 
@@ -42,7 +46,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     AppCustomTextboxComponent,
     TextboxFormControlComponent,
     DropdownFormControlComponent,
-    AppCustomDropdownComponent
+    AppCustomDropdownComponent,
+    DatepickerFormControlComponent,
+    DatetimepickerFormControlComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,10 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatTabsModule,
     MatSelectModule,
     MatAutocompleteModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatDatepickerModule, MatNativeDateModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
   exports: [
     NgxMatSelectSearchModule

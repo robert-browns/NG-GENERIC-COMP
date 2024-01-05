@@ -50,6 +50,41 @@
 
   </div>
 
+  <!-- <div>
+    <label for="yourDateControl">Date of birth:</label>
+    <input type="date" id="dob" formControlName="dob">
+  </div> -->
+
+  <div>
+    <smnx-datepicker-form-control hintLabel="Date of birth: " [formControl]="matForm2.get('dob')"
+      placeholder="Date of birth"></smnx-datepicker-form-control>
+  </div>
+  <div>
+    <smnx-datepicker-form-control hintLabel="Anniversary date: "
+      [formControl]="matForm2.get('adob')"></smnx-datepicker-form-control>
+  </div>
+  <div>
+    <smnx-datetimepicker-form-control hintLabel="DateTime of birth: "
+      [formControl]="matForm2.get('dobT')"></smnx-datetimepicker-form-control>
+  </div>
+
+  <!-- Angular matDatepicker -->
+  <!-- <div>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" formControlName="dob">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div> -->
+
+  <!-- <div>
+    <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" formControlName="dob"
+      (ngModelChange)="changeFn($event)" (blur)="blurFn()">
+    <owl-date-time #dt1></owl-date-time>
+  </div> -->
+
+
+
 
   <div>
     <button mat-raised-button color="primary" type="submit">Submit</button>

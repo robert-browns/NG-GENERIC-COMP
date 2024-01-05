@@ -13,7 +13,7 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
   // abstract setDisabledState?(isDisabled: boolean): void;
 
   public value = '';
-  public changed: (value: string) => void;
+  private changed: (value: string) => void;
   public touched: () => void;
   public disabled: boolean = false;
 
@@ -22,26 +22,43 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
     this.value = value;
   }
 
-  private extractValueFromInput(event: Event): string {
-    return (event.target as HTMLInputElement).value;
-  }
+  // private extractValueFromInput(event: Event): string {
+  //   return (event.target as HTMLInputElement).value;
+  // }
 
-  private extractValueFromMatSelect(event: MatSelectChange): string {
-    return event.value;
-  }
+  // private extractValueFromMatSelect(event: MatSelectChange): string {
+  //   return event.value;
+  // }
 
-  public onChange(event: Event | MatSelectChange): void {
+  // public onChangeV1(event: Event | MatSelectChange): void {
+  //   // debugger;
+  //   let val: string;
+  //   switch (true) {
+  //     case (event instanceof MatSelectChange):
+  //       val = this.extractValueFromMatSelect(event as MatSelectChange);
+  //       break;
+
+  //     case (event instanceof Event):
+  //       val = this.extractValueFromInput(event as Event);
+  //       break;
+
+  //     default:
+  //       console.error('Unknown data type for Event. Type: ' + typeof event);
+  //       break;
+  //   }
+  //   this.changed(val);
+  // }
+
+  public onChange(event: any) {
+    // debugger;
     let val: string;
-    switch (true) {
-      case (event instanceof MatSelectChange):
-        val = this.extractValueFromMatSelect(event);
-        break;
+    val = (event.target as HTMLInputElement).value;
 
-      default:
-        val = this.extractValueFromInput(event);
-        break;
-    }
-    this.changed(val);
+    this.setChangedFn(val);
+  }
+
+  public setChangedFn(eventData: string) {
+    this.changed(eventData);
   }
 
   registerOnChange(fn: any): void {

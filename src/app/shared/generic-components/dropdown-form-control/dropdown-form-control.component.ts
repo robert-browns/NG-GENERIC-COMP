@@ -46,7 +46,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   public isError: boolean;
 
   ngOnInit(): void {
-    debugger
+    // debugger
     this.filteredOptions = this.options;
 
     if (this.enableSearch) {
@@ -75,6 +75,14 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
       this.errorMessage = 'Select one of value from dropdown'; //TODO: Replace these error messages
       return this.errorMessage;
     }
+  }
+
+  public onChange(event: MatSelectChange) {
+    // debugger;
+    let val: string;
+    val = event.value;
+
+    this.setChangedFn(val);
   }
 
 }
