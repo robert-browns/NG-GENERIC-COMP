@@ -18,78 +18,72 @@
     <app-custom-dropdown [options]="states" [placeholder]="'Select an option'" [hintLabel]="'Dropdown'"
       [fieldName]="'dropdown'" [formControl]="matForm2.get('state')"></app-custom-dropdown>
   </div> -->
+  <div class="main__sec">
+    <section class="test__sec">
 
-  <h3 for="">Using app-textbox-form-control: </h3>
+      <div>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+        <br>
+      </div>
 
-  <div>
-    <app-textbox-form-control hintLabel='First name' maxlength="15" placeholder="Enter a first name"
-      [formControl]="matForm2.get('firstName')" [showMaxlength]="true"
-      [showHintLabel]="true"></app-textbox-form-control>
-  </div>
-  <div>
-    <app-textbox-form-control hintLabel='Last name' maxlength="15" placeholder="Enter a last name"
-      [formControl]="matForm2.get('lastName')"></app-textbox-form-control>
-  </div>
-  <!-- <div>
-    <app-custom-dropdown [options]="states" [placeholder]="'Select an option'" [hintLabel]="'Dropdown'"
-      [fieldName]="'dropdown'" [formControl]="matForm2.get('state')"></app-custom-dropdown>
-  </div> -->
-  <div>
-    <smnx-dropdown-form-control [options]="states" [placeholder]="'Select an option'" [hintLabel]="'State'"
-      [fieldName]="'State'" [formControl]="matForm2.get('state')" [overrideKeyValue]="false"
-      [enableSearch]="true"></smnx-dropdown-form-control>
-  </div>
-  <div>
-    <app-textbox-form-control hintLabel='Email' maxlength=" 50" placeholder="Enter your email" fieldType="email"
-      [formControl]="matForm2.get('email')"></app-textbox-form-control>
-  </div>
-  <div>
-    <app-textbox-form-control hintLabel='Password' maxlength="50" placeholder="Enter password" fieldType="password"
-      [formControl]="matForm2.get('password')">
-    </app-textbox-form-control>
+      <h3 for="">Using app-textbox-form-control: </h3>
 
-  </div>
+      <div>
+        <app-textbox-form-control hintLabel='First name' maxlength="15" placeholder="Enter a first name"
+          [formControl]="matForm2.get('firstName')" showMaxlength=true
+          [showHintLabel]="true"></app-textbox-form-control>
+      </div>
+      <div>
+        <app-textbox-form-control hintLabel='Last name' maxlength="15" placeholder="Enter a last name"
+          [formControl]="matForm2.get('lastName')"></app-textbox-form-control>
+      </div>
+      <div>
+        <smnx-dropdown-form-control [options]="states" [placeholder]="'Select an option'" [hintLabel]="'State'"
+          [fieldName]="'State'" [formControl]="matForm2.get('state')"
+          [enableSearch]="true"></smnx-dropdown-form-control>
+      </div>
+      <div>
+        <app-textbox-form-control hintLabel='Email' maxlength=" 50" placeholder="Enter your email" fieldType="email"
+          [formControl]="matForm2.get('email')"></app-textbox-form-control>
+      </div>
+      <div>
+        <app-textbox-form-control hintLabel='Password' maxlength="50" placeholder="Enter password" fieldType="password"
+          [formControl]="matForm2.get('password')">
+        </app-textbox-form-control>
 
-  <!-- <div>
-    <label for="yourDateControl">Date of birth:</label>
-    <input type="date" id="dob" formControlName="dob">
-  </div> -->
+      </div>
+      <div>
+        <smnx-datepicker-form-control hintLabel="Date of birth: " [formControl]="matForm2.get('dob')"
+          placeholder="Date of birth"></smnx-datepicker-form-control>
+      </div>
+      <div>
+        <smnx-datepicker-form-control hintLabel="Anniversary date: "
+          [formControl]="matForm2.get('adob')"></smnx-datepicker-form-control>
+      </div>
+      <div>
+        <smnx-datetimepicker-form-control hintLabel="DateTime of birth: "
+          [formControl]="matForm2.get('dobT')"></smnx-datetimepicker-form-control>
+      </div>
 
-  <div>
-    <smnx-datepicker-form-control hintLabel="Date of birth: " [formControl]="matForm2.get('dob')"
-      placeholder="Date of birth"></smnx-datepicker-form-control>
-  </div>
-  <div>
-    <smnx-datepicker-form-control hintLabel="Anniversary date: "
-      [formControl]="matForm2.get('adob')"></smnx-datepicker-form-control>
-  </div>
-  <div>
-    <smnx-datetimepicker-form-control hintLabel="DateTime of birth: "
-      [formControl]="matForm2.get('dobT')"></smnx-datetimepicker-form-control>
-  </div>
+      <div>
+        <smnx-checkbox-form-control label="Married?"
+          [formControl]="matForm2.get('married')"></smnx-checkbox-form-control>
+      </div>
 
-  <!-- Angular matDatepicker -->
-  <!-- <div>
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" formControlName="dob">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div> -->
-
-  <!-- <div>
-    <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" formControlName="dob"
-      (ngModelChange)="changeFn($event)" (blur)="blurFn()">
-    <owl-date-time #dt1></owl-date-time>
-  </div> -->
+      <div>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+        <br>
+      </div>
 
 
+    </section>
 
 
-  <div>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-    <br>
-    <span>Result:</span>
-    <p id="matResult"></p>
+    <section class="result__sec">
+      <h2>Result:</h2>
+      <br>
+      <pre id="matResult"></pre>
+    </section>
   </div>
 </form>

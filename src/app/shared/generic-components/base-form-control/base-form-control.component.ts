@@ -13,11 +13,12 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
   // abstract setDisabledState?(isDisabled: boolean): void;
 
   public value = '';
-  private changed: (value: string) => void;
+  private changed: (value: any) => void;
   public touched: () => void;
   public disabled: boolean = false;
 
   writeValue(value: any): void {
+    // debugger;
     if (value === null) return;
     this.value = value;
   }
@@ -57,7 +58,7 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
     this.setChangedFn(val);
   }
 
-  public setChangedFn(eventData: string) {
+  public setChangedFn(eventData: any) {
     this.changed(eventData);
   }
 

@@ -13,13 +13,16 @@
 
 <label *ngIf="showHintLabel">{{hintLabel}}</label>
 <div>
-  <mat-form-field>
-    <input matInput readonly [matDatepicker]="picker" [placeholder]="placeholder" [formControl]="formControl"
-      (dateChange)="onChange($event)" (blur)="touched()">
-    <button mat-icon-button matSuffix (click)="clearDate()">
-      <mat-icon>clear</mat-icon>
-    </button>
-    <mat-datepicker-toggle matSuffix [for]=" picker"></mat-datepicker-toggle>
+  <mat-form-field appearance="outline">
+    <div style="display: flex; align-items: center;">
+      <mat-datepicker-toggle matSuffix [for]=" picker"></mat-datepicker-toggle>
+      <input matInput readonly [matDatepicker]="picker" [placeholder]="placeholder" [formControl]="formControl"
+        (dateChange)="onChange($event)" (blur)="touched()" (click)=" picker.open()">
+      <button mat-icon-button matSuffix (click)="clearDate()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
   </mat-form-field>

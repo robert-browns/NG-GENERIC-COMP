@@ -1,0 +1,22 @@
+.main__sec {
+    display: flex;
+}
+
+.test__sec {
+    flex: 4;
+}
+
+.result__sec {
+    flex: 2;
+    width: 100%;
+    max-width: 85%;
+}
+
+.result__sec>pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    font-size: 18px;
+}

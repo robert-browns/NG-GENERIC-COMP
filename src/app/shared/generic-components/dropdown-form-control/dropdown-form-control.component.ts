@@ -47,6 +47,9 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
 
   ngOnInit(): void {
     // debugger
+
+    this.options.unshift({ value: '', viewValue: '--Select a option--' }); //Add default value at the beginning //TODO: Add message translate
+
     this.filteredOptions = this.options;
 
     if (this.enableSearch) {
@@ -84,5 +87,9 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
 
     this.setChangedFn(val);
   }
+
+  // getOptionValue(option: SelectOption) {
+  //   return option.viewValue === this.filteredOptions[0].viewValue ? '' : option.viewValue;
+  // }
 
 }

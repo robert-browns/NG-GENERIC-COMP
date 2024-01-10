@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SamplReactiveFormsComponent } from './sampl-reactive-forms/sampl-reactive-forms.component';
 import { MatReactiveFormsComponent } from './mat-reactive-forms/mat-reactive-forms.component';
 import { MatReactiveFormsUsingGenericComponent } from './mat-reactive-forms-using-generic/mat-reactive-forms-using-generic.component';
-import { MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatTabsModule } from '@angular/material';
+import { MatAutocompleteModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatTabsModule } from '@angular/material';
 import { AppCustomBtnToggleComponent } from './app-custom-btn-toggle/app-custom-btn-toggle.component';
 import { AppCustomTextboxComponent } from './app-custom-textbox/app-custom-textbox.component';
 import { TextboxFormControlComponent } from './shared/generic-components/textbox-form-control/textbox-form-control.component';
@@ -30,6 +30,7 @@ import { DatepickerFormControlComponent } from './shared/generic-components/date
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { DatetimepickerFormControlComponent } from './shared/generic-components/datetimepicker-form-control/datetimepicker-form-control.component';
+import { CheckboxFormControlComponent } from './shared/generic-components/checkbox-form-control/checkbox-form-control.component';
 
 
 
@@ -49,6 +50,7 @@ import { DatetimepickerFormControlComponent } from './shared/generic-components/
     AppCustomDropdownComponent,
     DatepickerFormControlComponent,
     DatetimepickerFormControlComponent,
+    CheckboxFormControlComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,9 +67,11 @@ import { DatetimepickerFormControlComponent } from './shared/generic-components/
     MatSelectModule,
     MatAutocompleteModule,
     NgxMatSelectSearchModule,
-    MatDatepickerModule, MatNativeDateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    MatCheckboxModule
   ],
   exports: [
     NgxMatSelectSearchModule

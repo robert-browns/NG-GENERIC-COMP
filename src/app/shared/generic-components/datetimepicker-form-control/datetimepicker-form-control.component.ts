@@ -55,9 +55,10 @@ export class DatetimepickerFormControlComponent extends BaseFormControlComponent
   // }
 
   validate(control: FormControl) {
+
     if (control.errors && control.errors.required) {
       this.errorMessage = 'Please select a date';
-      return { required: true };
+      // return { required: true };
     }
     // else if (control.value && !(control.value instanceof Date)) {
     //   this.errorMessage = 'Invalid date format';
@@ -65,20 +66,22 @@ export class DatetimepickerFormControlComponent extends BaseFormControlComponent
     // } 
     else {
       this.errorMessage = '';
-      return null;
+      // return null;
     }
+    return this.errorMessage
   }
 
 
+
   public onChange(event: any) {
-    debugger;
     const selectedDate = event.value === '' ? '' : event.value.toLocaleString();
 
     //for datepicker onChnage itself marks it as touched, and clears errors when a date is selected.
     if (selectedDate) {
       this.formControl.markAsTouched();
       this.formControl.setErrors(null);
-      this.errorMessage = null
+      // this.errorMessage = null;
+      this.formControl.updateValueAndValidity();
     }
 
     this.setChangedFn(selectedDate);
@@ -86,5 +89,9 @@ export class DatetimepickerFormControlComponent extends BaseFormControlComponent
 
   public clearDate() {
     this.formControl.setValue('');
+    this.formControl.markAsUntouched();
+    this.formControl.setErrors({ required: true });
+    // this.errorMessage = 'Please select a date';
+    this.formControl.updateValueAndValidity();
   }
 }

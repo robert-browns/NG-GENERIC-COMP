@@ -10,7 +10,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 export class MatReactiveFormsUsingGenericComponent implements OnInit {
 
   states = [
-    { value: '', viewValue: '--Select a option--' },
     { value: 'KA', viewValue: 'Karnataka' },
     { value: 'BH', viewValue: 'Bihar' },
     { value: 'GA', viewValue: 'Goa' },
@@ -42,6 +41,7 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
     dob: ['', Validators.required],
     adob: ['', Validators.required],
     dobT: ['', Validators.required],
+    married: [false, Validators.required],
     address: this.matForm2Builder.group({
       line1: [''],
       line2: [''],
@@ -59,7 +59,7 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
   onMatSubmit() {
     console.log(this.matForm2.value);
 
-    document.getElementById('matResult').innerText = JSON.stringify(this.matForm2.value);
+    document.getElementById('matResult').innerText = JSON.stringify(this.matForm2.value, null, 2);
   }
 
   // onDateChange(event: any) {
