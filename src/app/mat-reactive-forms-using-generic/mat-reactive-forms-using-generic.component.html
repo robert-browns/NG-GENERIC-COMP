@@ -26,39 +26,47 @@
         <br>
       </div>
 
-      <h3 for="">Using app-textbox-form-control: </h3>
+      <h3 for="">Using SMNX GENERIC FORM CONTROL'S: </h3>
 
       <div>
-        <app-textbox-form-control hintLabel='First name' maxlength="15" placeholder="Enter a first name"
-          [formControl]="matForm2.get('firstName')" showMaxlength=true
-          [showHintLabel]="true"></app-textbox-form-control>
+        <smnx-textbox-form-control hintLabel='First name' maxlength="15" placeholder="Enter a first name"
+          [formControl]="matForm2.get('firstName')" [uiConfig]="{ isRequired: true }"
+          [errorTypeConfig]="{ errorTypesList: [errorType.REQUIRED] }"></smnx-textbox-form-control>
       </div>
       <div>
-        <app-textbox-form-control hintLabel='Last name' maxlength="15" placeholder="Enter a last name"
-          [formControl]="matForm2.get('lastName')"></app-textbox-form-control>
+        <smnx-textbox-form-control hintLabel='Amount' maxlength="15" placeholder="Enter a Amount"
+          [formControl]="matForm2.get('amount')" [uiConfig]="{ isRequired: false, showMaxlength: true }"
+          [errorTypeConfig]="{ errorTypesList: [errorType.REQUIRED, errorType.MAXLENGTH, errorType.PATTERN], patternType: patternTypes.DECIMALS_ERROR }"></smnx-textbox-form-control>
+      </div>
+      <div>
+        <smnx-textbox-form-control hintLabel='Last name' maxlength=" 15" placeholder="Enter a last name"
+          [formControl]="matForm2.get('lastName')"
+          [uiConfig]="{ isRequired: true, showMaxlength: false, showHintLabel: true }"></smnx-textbox-form-control>
       </div>
       <div>
         <smnx-dropdown-form-control [options]="states" [placeholder]="'Select an option'" [hintLabel]="'State'"
           [fieldName]="'State'" [formControl]="matForm2.get('state')"
-          [enableSearch]="true"></smnx-dropdown-form-control>
+          [uiConfig]="{ enableSearch: true }"></smnx-dropdown-form-control>
       </div>
       <div>
-        <app-textbox-form-control hintLabel='Email' maxlength=" 50" placeholder="Enter your email" fieldType="email"
-          [formControl]="matForm2.get('email')"></app-textbox-form-control>
+        <smnx-textbox-form-control hintLabel='Email' maxlength="50" placeholder="Enter your email" fieldType="email"
+          [formControl]="matForm2.get('email')"
+          [uiConfig]="{ isRequired: true, showMaxlength: true, showHintLabel: false }"></smnx-textbox-form-control>
       </div>
       <div>
-        <app-textbox-form-control hintLabel='Password' maxlength="50" placeholder="Enter password" fieldType="password"
-          [formControl]="matForm2.get('password')">
-        </app-textbox-form-control>
+        <smnx-textbox-form-control hintLabel='Password' maxlength="50" placeholder="Enter password" fieldType="password"
+          [formControl]="matForm2.get('password')"
+          [uiConfig]="{ isRequired: true, showMaxlength: false, showHintLabel: false }">
+        </smnx-textbox-form-control>
 
       </div>
       <div>
-        <smnx-datepicker-form-control hintLabel="Date of birth: " [formControl]="matForm2.get('dob')"
-          placeholder="Date of birth"></smnx-datepicker-form-control>
+        <smnx-datepicker-form-control hintLabel="Date of birth: " placeholder="Date of birth: "
+          [formControl]="matForm2.get('dob')"></smnx-datepicker-form-control>
       </div>
       <div>
-        <smnx-datepicker-form-control hintLabel="Anniversary date: "
-          [formControl]="matForm2.get('adob')"></smnx-datepicker-form-control>
+        <smnx-datepicker-form-control hintLabel="Anniversary date: " placeholder="Anniversary date: "
+          [formControl]="matForm2.get('adob')" [uiConfig]="{ isRequired: true }"></smnx-datepicker-form-control>
       </div>
       <div>
         <smnx-datetimepicker-form-control hintLabel="DateTime of birth: "
@@ -75,7 +83,6 @@
         <button mat-raised-button color="primary" type="submit">Submit</button>
         <br>
       </div>
-
 
     </section>
 

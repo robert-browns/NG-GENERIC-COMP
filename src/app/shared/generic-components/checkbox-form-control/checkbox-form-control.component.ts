@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseFormControlComponent } from '../base-form-control/base-form-control.component';
 
 @Component({
@@ -11,29 +11,13 @@ import { BaseFormControlComponent } from '../base-form-control/base-form-control
     useExisting: forwardRef(() => CheckboxFormControlComponent),
     multi: true,
   },
-    // {
-    //   provide: NG_VALIDATORS,
-    //   useExisting: forwardRef(() => CheckboxFormControlComponent),
-    //   multi: true,
-    // }
   ]
 })
 export class CheckboxFormControlComponent extends BaseFormControlComponent {
 
-
   @Input() formControl: FormControl = new FormControl();
   @Input() label: string = 'label';
-
-  // public errorMessage: string = "";
-
-  // validate(control: FormControl) {
-
-  //   this.errorMessage = 'Please select checkbox!';
-
-  // }
-
   public onChange(event: Event) {
-
     let val: boolean;
     val = (event.target as HTMLInputElement).checked;
 

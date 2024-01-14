@@ -1,9 +1,13 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { BaseFormControlComponent } from '../base-form-control/base-form-control.component'
+import { GenericComponentsService } from '../serivces/generic-components.service';
+
+import { UIConfig, ErrorTypeConfig } from '../Models/generic-components.model';
+
 
 @Component({
-  selector: 'app-textbox-form-control',
+  selector: 'smnx-textbox-form-control',
   templateUrl: './textbox-form-control.component.html',
   styleUrls: ['./textbox-form-control.component.css'],
   providers: [
@@ -19,77 +23,47 @@ import { BaseFormControlComponent } from '../base-form-control/base-form-control
     },
   ],
 })
-export class TextboxFormControlComponent extends BaseFormControlComponent {
-
-
-  public errorMessage: string;
+export class TextboxFormControlComponent extends BaseFormControlComponent implements OnInit {
 
   @Input() formControl: FormControl = new FormControl();
   @Input() fieldName: string;
-  @Input() maxlength: number = 10;
+  @Input() maxlength: number = 99;
   @Input() placeholder: string = 'placeholder';
   @Input() hintLabel: string = 'label';
-  @Input() showHintLabel: boolean = false;
-  @Input() showMaxlength: boolean = false;
+  @Input() fieldType: 'text' | 'email' | 'password' = 'text';
 
-  @Input() public fieldType: 'text' | 'email' | 'password' = 'text';
+  //UI config options
+  @Input() uiConfig: UIConfig = {} as UIConfig;
+  @Input() errorTypeConfig: ErrorTypeConfig = {} as ErrorTypeConfig;
 
-  // public value = '';
-  // public disabled: boolean = false;
-  // public changed: (value: string) => void;
-  // public touched: () => void;
+  errorMessage: string;
+  TOOLTIP_POSITION: string = "above"; //TODO: Replace with Constants in WMS
 
-  // writeValue(value: any): void {
-  //   if (value === null) return;
-  //   this.value = value;
-  // }
+  constructor(private genericCompService: GenericComponentsService) {
+    super()
+  }
 
-  // public onChange(event: Event): void {
-  //   const val: string = (<HTMLInputElement>event.target).value;
+  ngOnInit(): void {
+    const defaultUIConfig: UIConfig = {
+      showHintLabel: true,
+      showMaxlength: true,
+      isRequired: false
+    }
 
-  //   this.changed(val);
-  // }
+    const defaultErrorTypeConfig: ErrorTypeConfig = {
+      errorTypesList: [],
+      patternType: ""
+    }
 
-  // registerOnChange(fn: any): void {
-  //   this.changed = fn;
-  // }
+    this.uiConfig = this.genericCompService.setDefaultValueForConfigs(this.uiConfig, defaultUIConfig);
+    this.errorTypeConfig = this.genericCompService.setDefaultValueForConfigs(this.errorTypeConfig, defaultErrorTypeConfig);
 
-  // registerOnTouched(fn: any): void {
-  //   this.touched = fn;
-  // }
-
-  // setDisabledState?(isDisabled: boolean): void {
-  //   this.disabled = isDisabled;
-  // }
+  }
 
   validate(control: FormControl) {
 
-    switch (this.fieldType) {
-      case 'email':
-        if (control.hasError('required')) {
-          this.errorMessage = 'You must enter a email address';
-          return this.errorMessage;
-        }
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        this.errorMessage = emailPattern.test(control.value) ? '' : 'Not a valid email';
-        break;
-      case 'password':
-        if (control.hasError('required')) {
-          this.errorMessage = 'You must enter a password';
-          return this.errorMessage;
-        }
-        const passwordPattern = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
-        this.errorMessage = passwordPattern.test(control.value) ? '' : 'Password must be at least 8 characters long and include at least one special character, one uppercase letter, and one number';
-        break;
+    this.errorMessage = this.genericCompService.getErrorMessage(control, this.errorTypeConfig.errorTypesList, this.errorTypeConfig.patternType, []); //TODO: Add the localizedData here in WMS
 
-      default:
-        if (control.hasError('required')) {
-          this.errorMessage = 'You must enter a value';
-          return this.errorMessage;
-        }
-        this.errorMessage = ''
-        break;
-    }
     return this.errorMessage;
   }
 

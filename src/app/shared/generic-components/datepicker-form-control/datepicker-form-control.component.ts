@@ -1,6 +1,8 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseFormControlComponent } from '../base-form-control/base-form-control.component';
+import { UIConfig } from '../Models/generic-components.model';
+import { GenericComponentsService } from '../serivces/generic-components.service';
 
 @Component({
   selector: 'smnx-datepicker-form-control',
@@ -19,45 +21,26 @@ import { BaseFormControlComponent } from '../base-form-control/base-form-control
     }
   ]
 })
-export class DatepickerFormControlComponent extends BaseFormControlComponent {
+export class DatepickerFormControlComponent extends BaseFormControlComponent implements OnInit {
 
-  public errorMessage: string;
 
   @Input() formControl: FormControl = new FormControl();
   @Input() fieldName: string;
-  // @Input() maxlength: number = 10;
   @Input() placeholder: string = 'placeholder';
   @Input() hintLabel: string = 'label';
-  @Input() showHintLabel: boolean = true;
-  @Input() showMaxlength: boolean = false;
 
-  // @Input() public fieldType: 'text' | 'email' | 'password' = 'text';
+  //UI config options
+  // @Input() showHintLabel: boolean = false;
+  //UI config options
+  @Input() uiConfig: UIConfig = {} as UIConfig;
 
-  // validate(control: FormControl) {
-  //   if (control.hasError('required')) {
-  //     this.errorMessage = 'Please select a date'; //TODO: Replace these error messages
-  //     return this.errorMessage;
-  //   }
-  //   this.errorMessage = null;
-  //   return this.errorMessage;
-  // }
 
-  // validate(control: FormControl) {
-  //   if (control.errors && control.errors.required) {
-  //     // this.formControl.setErrors({ 'required': true });
-  //     // return { required: true };
-  //     this.errorMessage = "Please select a date"
-  //     return this.errorMessage;
-  //   } else {
-  //     // this.formControl.setErrors(null);
-  //     return null;
-  //   }
-  // }
+  public errorMessage: string;
+  TOOLTIP_POSITION: string = "above"; //TODO: Replace with Constants in WMS
 
   validate(control: FormControl) {
     if (control.errors && control.errors.required) {
-      this.errorMessage = 'Please select a date';
-      // return { required: true };
+      this.errorMessage = 'Please select a date'; //TODO: Replace these error messages
     }
     // else if (control.value && !(control.value instanceof Date)) {
     //   this.errorMessage = 'Invalid date format';
@@ -65,31 +48,43 @@ export class DatepickerFormControlComponent extends BaseFormControlComponent {
     // } 
     else {
       this.errorMessage = '';
-      // return null;
     }
     return this.errorMessage;
   }
 
+  constructor(private genericCompService: GenericComponentsService) {
+    super();
+  }
+
+  ngOnInit(): void {
+    const defaultUIConfig: UIConfig = {
+      isRequired: false
+    }
+
+    this.uiConfig = this.genericCompService.setDefaultValueForConfigs(this.uiConfig, defaultUIConfig);
+  }
+
 
   public onChange(event: any) {
-    const selectedDate = event.value === '' ? '' : event.value.toISOString();
+    const selectedDate = event.value === '' ? '' : event.value.toLocaleString();
 
-    //for datepicker onChnage itself marks it as touched, and clears errors when a date is selected.
+    //for datepicker onChange itself marks it as touched, and clears errors when a date is selected.
     if (selectedDate) {
       this.formControl.markAsTouched();
       this.formControl.setErrors(null);
-      // this.errorMessage = null
       this.formControl.updateValueAndValidity();
     }
 
     this.setChangedFn(selectedDate);
   }
 
-  public clearDate() {
+  public clearDate(event: Event) {
+
+    event.stopPropagation();
+
     this.formControl.setValue('');
     this.formControl.markAsUntouched();
     this.formControl.setErrors({ required: true });
-    // this.errorMessage = 'Please select a date';
     this.formControl.updateValueAndValidity();
   }
 

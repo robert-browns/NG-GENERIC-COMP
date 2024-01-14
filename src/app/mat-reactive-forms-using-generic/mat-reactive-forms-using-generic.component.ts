@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { V } from '@angular/core/src/render3';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Constants } from '../shared/generic-components/Constants/constants';
 
 @Component({
   selector: 'app-mat-reactive-forms-using-generic',
@@ -14,6 +15,16 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
     { value: 'BH', viewValue: 'Bihar' },
     { value: 'GA', viewValue: 'Goa' },
   ];
+
+  errorType = Constants.ErrorType;
+  patternTypes = Constants.PatternTypes;
+
+  // In case where value and viewValue are same. Use [overrideKeyValue]="true" in dropdown 
+  // states = [
+  //   { value: 'Karnataka', viewValue: 'Karnataka' },
+  //   { value: 'Bihar', viewValue: 'Bihar' },
+  //   { value: 'Goa', viewValue: 'Goa' },
+  // ];
 
   /*  Move below to Model class in separate file
    //TODO: Create a Model of an export class with field name such as firstName, etc..
@@ -37,11 +48,12 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
-    state: ['', Validators.required],
+    state: ['KA', Validators.required],
     dob: ['', Validators.required],
     adob: ['', Validators.required],
     dobT: ['', Validators.required],
-    married: [false, Validators.required],
+    amount: ['', [Validators.maxLength(9), Validators.pattern('[0-9]+(\.[0-9][0-9]?[0-9]?[0-9]?)?')]],
+    married: [false],
     address: this.matForm2Builder.group({
       line1: [''],
       line2: [''],

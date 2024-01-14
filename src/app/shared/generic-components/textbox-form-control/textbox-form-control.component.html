@@ -1,7 +1,9 @@
-<mat-form-field [hintLabel]="showHintLabel ? hintLabel : ''" appearance="outline"> <!-- legacy -->
+<mat-form-field [hintLabel]="uiConfig.showHintLabel ? hintLabel : ''" appearance="outline"> <!-- legacy -->
   <mat-label>{{hintLabel}}</mat-label>
   <input matInput #input [attr.maxlength]="maxlength" [placeholder]="placeholder" [value]="value" [type]="fieldType"
-    [disabled]="disabled" (input)="onChange($event)" (blur)="touched()" [formControl]="formControl">
-  <mat-hint align="end" *ngIf="showMaxlength">{{input.value?.length || 0}}/{{maxlength}}</mat-hint>
+    [disabled]="disabled" (input)="onChange($event)" (blur)="touched()" [formControl]="formControl"
+    [required]="uiConfig.isRequired" [matTooltip]="formControl.value" [matTooltipDisabled]="fieldType === 'password'"
+    [matTooltipPosition]="TOOLTIP_POSITION">
+  <mat-hint align="end" *ngIf="uiConfig.showMaxlength">{{input.value?.length || 0}}/{{maxlength}}</mat-hint>
   <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
 </mat-form-field>

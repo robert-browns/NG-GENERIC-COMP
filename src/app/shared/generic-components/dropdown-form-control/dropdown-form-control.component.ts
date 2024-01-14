@@ -4,10 +4,25 @@ import { FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
 import { debounceTime, map } from 'rxjs/operators';
 
-interface SelectOption {
-  value: string;
-  viewValue: string;
-}
+import { UIConfig, ErrorTypeConfig, SelectOption } from '../Models/generic-components.model';
+import { GenericComponentsService } from '../serivces/generic-components.service';
+
+// interface SelectOption {
+//   value: string;
+//   viewValue: string;
+// }
+
+// interface UIConfig {
+//   isRequired?: boolean;
+//   showHintLabel?: boolean;
+//   overrideKeyValue?: boolean;
+//   enableSearch?: boolean;
+// }
+
+// interface ErrorTypeConfig {
+//   errorTypesList?: string[];
+//   patternType?: string;
+// }
 
 @Component({
   selector: 'smnx-dropdown-form-control',
@@ -28,31 +43,52 @@ interface SelectOption {
 })
 export class DropdownFormControlComponent extends BaseFormControlComponent implements OnInit {
 
+  @Input() formControl: FormControl = new FormControl();
+  @Input() public fieldName: string;
+  @Input() placeholder: string = "placeholder";
+  @Input() hintLabel: string = "label";
+
   @Input() options: SelectOption[] = [];
   filteredOptions: SelectOption[] = [];
   searchControl = new FormControl();
 
-  @Input() maxlength: number = 10;
-  @Input() placeholder: string = "placeholder";
-  @Input() hintLabel: string = "label";
+  //UI config options
+  // @Input() overrideKeyValue: boolean = false;
+  // @Input() enableSearch: boolean = false;
+  // @Input() showHintLabel: boolean = true;
+  // @Input() isRequired: boolean = false;
 
-  @Input() public fieldName: string;
-  @Input() formControl: FormControl;
+  defaultOverrideKeyValue: boolean = false;
+  defaultEnableSearch: boolean = false;
+  defaultShowHintLabel: boolean = true;
+  defaultIsRequired: boolean = false;
 
-  @Input() overrideKeyValue: Boolean = false;
-  @Input() enableSearch: Boolean = false;
+  @Input() uiConfig: UIConfig = {};
 
   public errorMessage: string;
-  public isError: boolean;
+  // public isError: boolean;
+  TOOLTIP_POSITION: string = "above"; //TODO: Replace with Constants in WMS
+
+  constructor(private genericCompService: GenericComponentsService) {
+    super()
+  }
 
   ngOnInit(): void {
-    // debugger
+
+    const defaultUIConfig: UIConfig = {
+      showHintLabel: true,
+      overrideKeyValue: false,
+      enableSearch: false,
+      isRequired: false
+    }
+
+    this.uiConfig = this.genericCompService.setDefaultValueForConfigs(this.uiConfig, defaultUIConfig);
 
     this.options.unshift({ value: '', viewValue: '--Select a option--' }); //Add default value at the beginning //TODO: Add message translate
 
     this.filteredOptions = this.options;
 
-    if (this.enableSearch) {
+    if (this.uiConfig.enableSearch) {
       // Subscribe to changes in the search control to update the filtered list
       this.searchControl.valueChanges
         .pipe(
@@ -75,7 +111,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
 
   validate(control: FormControl) {
     if (control.hasError('required')) {
-      this.errorMessage = 'Select one of value from dropdown'; //TODO: Replace these error messages
+      this.errorMessage = 'Select a value from dropdown'; //TODO: Replace these error messages
       return this.errorMessage;
     }
   }
@@ -88,8 +124,8 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
     this.setChangedFn(val);
   }
 
-  // getOptionValue(option: SelectOption) {
-  //   return option.viewValue === this.filteredOptions[0].viewValue ? '' : option.viewValue;
-  // }
+  getOptionValue(option: SelectOption) {
+    return option.viewValue === this.filteredOptions[0].viewValue ? '' : option.viewValue;
+  }
 
 }
