@@ -31,6 +31,7 @@ import { DatepickerFormControlComponent } from './shared/generic-components/date
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { DatetimepickerFormControlComponent } from './shared/generic-components/datetimepicker-form-control/datetimepicker-form-control.component';
 import { CheckboxFormControlComponent } from './shared/generic-components/checkbox-form-control/checkbox-form-control.component';
+import { DropdowngroupFormControlComponent } from './shared/generic-components/dropdowngroup-form-control/dropdowngroup-form-control.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { CheckboxFormControlComponent } from './shared/generic-components/checkb
     DatepickerFormControlComponent,
     DatetimepickerFormControlComponent,
     CheckboxFormControlComponent,
+    DropdowngroupFormControlComponent,
   ],
   imports: [
     BrowserModule,

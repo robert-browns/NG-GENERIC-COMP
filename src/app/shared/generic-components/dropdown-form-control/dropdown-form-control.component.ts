@@ -7,22 +7,6 @@ import { debounceTime, map } from 'rxjs/operators';
 import { UIConfig, ErrorTypeConfig, SelectOption } from '../Models/generic-components.model';
 import { GenericComponentsService } from '../serivces/generic-components.service';
 
-// interface SelectOption {
-//   value: string;
-//   viewValue: string;
-// }
-
-// interface UIConfig {
-//   isRequired?: boolean;
-//   showHintLabel?: boolean;
-//   overrideKeyValue?: boolean;
-//   enableSearch?: boolean;
-// }
-
-// interface ErrorTypeConfig {
-//   errorTypesList?: string[];
-//   patternType?: string;
-// }
 
 @Component({
   selector: 'smnx-dropdown-form-control',
@@ -68,6 +52,8 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   public errorMessage: string;
   // public isError: boolean;
   TOOLTIP_POSITION: string = "above"; //TODO: Replace with Constants in WMS
+
+  // @Output() selectionChanged: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private genericCompService: GenericComponentsService) {
     super()
@@ -127,5 +113,15 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   getOptionValue(option: SelectOption) {
     return option.value === this.filteredOptions[0].value ? '' : option.value;
   }
+
+  // onSelectionChange(selectedValue: any) {
+  //   this.selectionChanged.emit(selectedValue);
+  // }
+
+  //explicitly set value in case of dropdown-group
+  setControlValue(value: any) {
+    this.formControl.setValue(value, { emitEvent: false });
+  }
+
 
 }

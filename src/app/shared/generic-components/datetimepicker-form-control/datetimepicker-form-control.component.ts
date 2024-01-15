@@ -41,7 +41,8 @@ export class DatetimepickerFormControlComponent extends BaseFormControlComponent
 
   ngOnInit(): void {
     const defaultUIConfig: UIConfig = {
-      isRequired: false
+      isRequired: false,
+      hour12Timer: true
     }
 
     this.uiConfig = this.genericCompService.setDefaultValueForConfigs(this.uiConfig, defaultUIConfig);

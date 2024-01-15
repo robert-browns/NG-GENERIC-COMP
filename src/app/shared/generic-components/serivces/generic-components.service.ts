@@ -31,7 +31,7 @@ export class GenericComponentsService {
   }
 
   getErrorMessage(control: any, errorTypesList: string[], patternType: string, localizedData: any): string {
-    debugger
+    // debugger
     if (errorTypesList.length === 0 && control.hasError('required')) {
       return this.isEmptyOrDefault(localizedData['1751'], 'Required');
     }

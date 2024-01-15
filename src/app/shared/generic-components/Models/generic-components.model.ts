@@ -4,6 +4,7 @@ export interface UIConfig {
     overrideKeyValue?: boolean;
     enableSearch?: boolean;
     showMaxlength?: boolean;
+    hour12Timer?: boolean;
 }
 
 export interface ErrorTypeConfig {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { V } from '@angular/core/src/render3';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Constants } from '../shared/generic-components/Constants/constants';
 
 @Component({
@@ -9,6 +9,9 @@ import { Constants } from '../shared/generic-components/Constants/constants';
   styleUrls: ['./mat-reactive-forms-using-generic.component.css']
 })
 export class MatReactiveFormsUsingGenericComponent implements OnInit {
+
+  dropdownControls: FormControl[] = [];
+  matForm2: FormGroup;
 
   states = [
     { id: 'KA', value: 'Karnataka' },
@@ -30,53 +33,53 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
   //   { id: 'Goa', value: 'Goa' },
   // ];
 
-  /*  Move below to Model class in separate file
-   //TODO: Create a Model of an export class with field name such as firstName, etc..
+  products = [
+    { id: 119, value: 'Burger' },
+    { id: 120, value: 'Pizza' },
+    { id: 121, value: 'Sandwich' },
+  ];
 
-   //TODO: Create a formControls using Model using Creation() fn
-    //Here, in component add below
-    // For table screens - pass the model to SelectionModel in a variable
-    
-    // For Popup screens - have model created from creation() 
-   
-    //Here, in component add below
-    // For table screens - pass the model to SelectionModel in a variable
-    
-    // For Popup screens - have model created from creation() 
+  categories = [
+    { id: 11, value: 'FNB' },
+    { id: 12, value: 'Beverages' },
+  ];
 
- */
+  productGroups = [
+    { id: 45, value: 'Foods' },
+    { id: 46, value: 'Drinks' },
+  ];
 
+  initForm() {
 
-  matForm2 = this.matForm2Builder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
-    state: ['KA', Validators.required],
-    dob: ['', Validators.required],
-    adob: ['', Validators.required],
-    dobT: ['', Validators.required],
-    amount: ['', [Validators.maxLength(9), Validators.pattern('[0-9]+(\.[0-9][0-9]?[0-9]?[0-9]?)?')]],
-    married: [false],
+    this.matForm2 = this.matForm2Builder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      state: ['KA', Validators.required],
+      dob: ['', Validators.required],
+      adob: ['', Validators.required],
+      dobT: ['', Validators.required],
+      amount: ['', [Validators.maxLength(9), Validators.pattern('[0-9]+(\.[0-9][0-9]?[0-9]?[0-9]?)?')]],
+      married: [false],
+      CategoryId: [-1],
+      ProductId: [-1],
+      ProductGroupId: [-1],
+      address: this.matForm2Builder.group({
+        line1: [''],
+        line2: [''],
+        line3: [''],
+        city: [''],
+        zip: [''],
+      })
 
-    CategoryId: [''],
-    ProductId: [''],
-    ProductGroupId: [''],
-
-    freeMeal: ['-1'],
-
-    address: this.matForm2Builder.group({
-      line1: [''],
-      line2: [''],
-      line3: [''],
-      city: [''],
-      zip: [''],
     })
-  })
+  }
 
   constructor(private matForm2Builder: FormBuilder) { }
 
   ngOnInit() {
+    this.initForm();
   }
 
   onMatSubmit() {
@@ -85,39 +88,10 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
     document.getElementById('matResult').innerText = JSON.stringify(this.matForm2.value, null, 2);
   }
 
-  // onDateChange(event: any) {
-  //   debugger;
-  //   const selectedDate = event.target.value;
-
-  //   if (selectedDate) {
-  //     const selectedDateTime = new Date(`${selectedDate}T00:00:00.000Z`);
-  //     const formattedDate = selectedDateTime.toISOString();
-
-  //     // Now 'formattedDate' has the desired format with timezone information
-  //     console.log(formattedDate);
-  //   }
-  // }
-
   changeFn(event: Event) {
     console.log("changeFn" + event);
   }
   blurFn() {
     console.log("blurFn");
-  }
-
-  disableControls(name: string) {
-    if (name == "ProductId") {
-      this.matForm2.controls.ProductId.patchValue('-1');
-      this.matForm2.controls.ProductGroupId.patchValue('-1');
-      // this.setProductDescription();
-    }
-    if (name == "CategoryId") {
-      this.matForm2.controls.ProductId.patchValue('-1');
-      this.matForm2.controls.ProductGroupId.patchValue('-1');
-    }
-    if (name == 'ProductGroupId') {
-      this.matForm2.controls.CategoryId.patchValue('-1');
-      this.matForm2.controls.ProductId.patchValue('-1');
-    }
   }
 }
