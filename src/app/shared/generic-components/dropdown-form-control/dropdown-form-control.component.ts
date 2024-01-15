@@ -84,7 +84,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
 
     this.uiConfig = this.genericCompService.setDefaultValueForConfigs(this.uiConfig, defaultUIConfig);
 
-    this.options.unshift({ value: '', viewValue: '--Select a option--' }); //Add default value at the beginning //TODO: Add message translate
+    this.options.unshift({ id: '', value: '--Select a option--' }); //Add default value at the beginning //TODO: Add message translate
 
     this.filteredOptions = this.options;
 
@@ -105,7 +105,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
 
   filterOptions(value: string): SelectOption[] {
     return this.options.filter(food =>
-      food.viewValue.toLowerCase().includes(value.toLowerCase())
+      food.value.toLowerCase().includes(value.toLowerCase())
     );
   }
 
@@ -125,7 +125,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   }
 
   getOptionValue(option: SelectOption) {
-    return option.viewValue === this.filteredOptions[0].viewValue ? '' : option.viewValue;
+    return option.value === this.filteredOptions[0].value ? '' : option.value;
   }
 
 }

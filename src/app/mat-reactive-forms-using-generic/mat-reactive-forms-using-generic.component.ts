@@ -11,19 +11,23 @@ import { Constants } from '../shared/generic-components/Constants/constants';
 export class MatReactiveFormsUsingGenericComponent implements OnInit {
 
   states = [
-    { value: 'KA', viewValue: 'Karnataka' },
-    { value: 'BH', viewValue: 'Bihar' },
-    { value: 'GA', viewValue: 'Goa' },
+    { id: 'KA', value: 'Karnataka' },
+    { id: 'BH', value: 'Bihar' },
+    { id: 'GA', value: 'Goa' },
   ];
+
+  // meals ={
+  //   {value: }
+  // }
 
   errorType = Constants.ErrorType;
   patternTypes = Constants.PatternTypes;
 
   // In case where value and viewValue are same. Use [overrideKeyValue]="true" in dropdown 
   // states = [
-  //   { value: 'Karnataka', viewValue: 'Karnataka' },
-  //   { value: 'Bihar', viewValue: 'Bihar' },
-  //   { value: 'Goa', viewValue: 'Goa' },
+  //   { id: 'Karnataka', value: 'Karnataka' },
+  //   { id: 'Bihar', value: 'Bihar' },
+  //   { id: 'Goa', value: 'Goa' },
   // ];
 
   /*  Move below to Model class in separate file
@@ -54,6 +58,13 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
     dobT: ['', Validators.required],
     amount: ['', [Validators.maxLength(9), Validators.pattern('[0-9]+(\.[0-9][0-9]?[0-9]?[0-9]?)?')]],
     married: [false],
+
+    CategoryId: [''],
+    ProductId: [''],
+    ProductGroupId: [''],
+
+    freeMeal: ['-1'],
+
     address: this.matForm2Builder.group({
       line1: [''],
       line2: [''],
@@ -92,5 +103,21 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
   }
   blurFn() {
     console.log("blurFn");
+  }
+
+  disableControls(name: string) {
+    if (name == "ProductId") {
+      this.matForm2.controls.ProductId.patchValue('-1');
+      this.matForm2.controls.ProductGroupId.patchValue('-1');
+      // this.setProductDescription();
+    }
+    if (name == "CategoryId") {
+      this.matForm2.controls.ProductId.patchValue('-1');
+      this.matForm2.controls.ProductGroupId.patchValue('-1');
+    }
+    if (name == 'ProductGroupId') {
+      this.matForm2.controls.CategoryId.patchValue('-1');
+      this.matForm2.controls.ProductId.patchValue('-1');
+    }
   }
 }

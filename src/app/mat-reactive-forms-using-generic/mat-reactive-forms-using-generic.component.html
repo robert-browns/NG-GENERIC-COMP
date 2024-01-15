@@ -46,7 +46,7 @@
       <div>
         <smnx-dropdown-form-control [options]="states" [placeholder]="'Select an option'" [hintLabel]="'State'"
           [fieldName]="'State'" [formControl]="matForm2.get('state')"
-          [uiConfig]="{ enableSearch: true }"></smnx-dropdown-form-control>
+          [uiConfig]="{ enableSearch: true, overrideKeyValue: false }"></smnx-dropdown-form-control>
       </div>
       <div>
         <smnx-textbox-form-control hintLabel='Email' maxlength="50" placeholder="Enter your email" fieldType="email"
