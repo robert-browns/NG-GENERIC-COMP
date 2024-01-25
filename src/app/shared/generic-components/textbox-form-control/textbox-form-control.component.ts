@@ -5,6 +5,8 @@ import { GenericComponentsService } from '../serivces/generic-components.service
 
 import { UIConfig, ErrorTypeConfig } from '../Models/generic-components.model';
 
+import { Constants } from '../Constants/constants';
+
 
 @Component({
   selector: 'smnx-textbox-form-control',
@@ -37,7 +39,7 @@ export class TextboxFormControlComponent extends BaseFormControlComponent implem
   @Input() errorTypeConfig: ErrorTypeConfig = {} as ErrorTypeConfig;
 
   errorMessage: string;
-  TOOLTIP_POSITION: string = "above"; //TODO: Replace with Constants in WMS
+  TOOLTIP_POSITION: string = Constants.ToolTip.Position;
 
   constructor(private genericCompService: GenericComponentsService) {
     super()

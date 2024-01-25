@@ -24,4 +24,8 @@ export class Constants {
         "WEBSITE_ERROR": "WEBSITE_ERROR",
         "COORDINATES_ERROR": "COORDINATES_ERROR"
     }
+
+    public static ToolTip = {
+        "Position": "above"
+    }
 }

@@ -71,6 +71,6 @@ export class GenericComponentsService {
   }
 
   setDefaultValueForConfigs<T>(config: T, defaults: Partial<T>): T {
-    return { ...defaults, ...config };
+    return Object.assign({}, defaults, config);
   }
 }

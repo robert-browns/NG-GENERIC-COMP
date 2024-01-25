@@ -1,19 +1,18 @@
 <mat-form-field [hintLabel]="uiConfig.showHintLabel ? hintLabel : ''" appearance="outline">
   <mat-label>{{ hintLabel }}</mat-label>
 
-  <mat-select #select [placeholder]="placeholder" [disabled]="disabled" (selectionChange)="onChange($event)"
-    [formControl]="formControl" [required]="uiConfig.isRequired" [matTooltip]="formControl.value"
-    [matTooltipPosition]="TOOLTIP_POSITION">
+  <mat-select #select [placeholder]="placeholder" (selectionChange)="onChange($event)" [formControl]="formControl"
+    [required]="uiConfig.isRequired" [matTooltip]="formControl.value" [matTooltipPosition]="TOOLTIP_POSITION">
     <span *ngIf="uiConfig.enableSearch">
       <ngx-mat-select-search [formControl]="searchControl" placeholderLabel="Search"
         noEntriesFoundLabel="No Records Found!"></ngx-mat-select-search>
     </span>
     <span *ngIf="!uiConfig.overrideKeyValue">
-      <mat-option *ngFor="let option of filteredOptions" [value]="option.id">{{ option.value
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.Id">{{ option.Name
         }}</mat-option></span>
     <span *ngIf="uiConfig.overrideKeyValue">
       <mat-option *ngFor="let option of filteredOptions" [value]="getOptionValue(option)">
-        {{ option.value }}
+        {{ option.Name }}
       </mat-option>
     </span>
   </mat-select>

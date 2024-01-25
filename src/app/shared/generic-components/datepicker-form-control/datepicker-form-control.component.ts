@@ -40,7 +40,7 @@ export class DatepickerFormControlComponent extends BaseFormControlComponent imp
 
   validate(control: FormControl) {
     if (control.errors && control.errors.required) {
-      this.errorMessage = 'Please select a date'; //TODO: Replace these error messages
+      this.errorMessage = 'Required'; //TODO: Replace these error messages
     }
     // else if (control.value && !(control.value instanceof Date)) {
     //   this.errorMessage = 'Invalid date format';
@@ -79,13 +79,16 @@ export class DatepickerFormControlComponent extends BaseFormControlComponent imp
   }
 
   public clearDate(event: Event) {
-
     event.stopPropagation();
+    event.preventDefault();
 
-    this.formControl.setValue('');
+    console.log(this.formControl.validator);
+
+    this.formControl.patchValue('');
     this.formControl.markAsUntouched();
-    this.formControl.setErrors({ required: true });
     this.formControl.updateValueAndValidity();
   }
 
 }
+
+

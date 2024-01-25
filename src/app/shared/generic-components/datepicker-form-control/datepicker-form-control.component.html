@@ -1,3 +1,18 @@
+<style>
+  .pseudo-btn {
+    cursor: pointer;
+  }
+
+  .pseudo-btn:hover {
+    border: none;
+  }
+
+  .pseudo-btn:focus,
+  .pseudo-btn[tabindex]:focus {
+    border: 1px solid orange !important;
+  }
+</style>
+
 <div>
   <mat-form-field appearance="outline" (click)="picker.open()">
     <mat-label>{{hintLabel}}</mat-label>
@@ -6,10 +21,10 @@
     <input matInput readonly [matDatepicker]="picker" [placeholder]="placeholder" [formControl]="formControl"
       [required]="uiConfig.isRequired" (dateChange)="onChange($event)" (blur)="touched()"
       [matTooltip]="formControl.value" [matTooltipPosition]="TOOLTIP_POSITION" style="display: none;">
-    <input matInput type="text" value="{{formControl.value | date: 'dd-MMM-yyyy'}}" [matTooltip]="formControl.value"
-      [matTooltipPosition]="TOOLTIP_POSITION">
+    <input matInput readonly type="text" value="{{formControl.value | date: 'dd-MMM-yyyy'}}"
+      [matTooltip]="formControl.value" [matTooltipPosition]="TOOLTIP_POSITION">
 
-    <button mat-icon-button matSuffix aria-label="Clear" (click)="clearDate($event)">
+    <button mat-icon-button matSuffix aria-label="Clear" (click)="clearDate($event)" type="button">
       <mat-icon>close</mat-icon>
     </button>
 

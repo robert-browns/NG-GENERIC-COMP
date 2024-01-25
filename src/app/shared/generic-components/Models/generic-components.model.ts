@@ -14,7 +14,7 @@ export interface ErrorTypeConfig {
 
 //For Dropdown select
 export interface SelectOption {
-    id: string;
-    value: string;
+    Id: string | number;
+    Name: string;
 }
 

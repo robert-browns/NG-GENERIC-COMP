@@ -72,7 +72,8 @@ import { DropdowngroupFormControlComponent } from './shared/generic-components/d
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+
   ],
   exports: [
     NgxMatSelectSearchModule

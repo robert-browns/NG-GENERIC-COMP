@@ -60,7 +60,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   }
 
   ngOnInit(): void {
-
+    debugger;
     const defaultUIConfig: UIConfig = {
       showHintLabel: true,
       overrideKeyValue: false,
@@ -70,9 +70,11 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
 
     this.uiConfig = this.genericCompService.setDefaultValueForConfigs(this.uiConfig, defaultUIConfig);
 
-    this.options.unshift({ id: '', value: '--Select a option--' }); //Add default value at the beginning //TODO: Add message translate
-
     this.filteredOptions = this.options;
+
+    if (this.filteredOptions.length === 0) {
+      this.filteredOptions = [{ Id: "-1", Name: "<Select>" }]
+    }
 
     if (this.uiConfig.enableSearch) {
       // Subscribe to changes in the search control to update the filtered list
@@ -90,8 +92,8 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   }
 
   filterOptions(value: string): SelectOption[] {
-    return this.options.filter(food =>
-      food.value.toLowerCase().includes(value.toLowerCase())
+    return this.options.filter(option =>
+      option.Name.toLowerCase().includes(value.toLowerCase())
     );
   }
 
@@ -111,17 +113,12 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   }
 
   getOptionValue(option: SelectOption) {
-    return option.value === this.filteredOptions[0].value ? '' : option.value;
+    return option.Name === this.filteredOptions[0].Name ? '' : option.Name;
   }
-
-  // onSelectionChange(selectedValue: any) {
-  //   this.selectionChanged.emit(selectedValue);
-  // }
 
   //explicitly set value in case of dropdown-group
-  setControlValue(value: any) {
-    this.formControl.setValue(value, { emitEvent: false });
-  }
-
+  // setControlValue(value: any) {
+  //   this.formControl.patchValue(value, { emitEvent: false });
+  // }
 
 }

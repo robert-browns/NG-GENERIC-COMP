@@ -61,11 +61,11 @@ export class DropdowngroupFormControlComponent implements AfterContentInit, OnDe
   }
 
   handleDropdownChange(selectedValue: any, currentIndex: number) {
-    debugger;
+    // debugger;
     // Clear and set -1 for other dropdowns
     this.dropdownFormControlList.forEach((control, index) => {
       if (index !== currentIndex) {
-        control.formControl.setValue(this.clearValue, { emitEvent: false });
+        control.formControl.patchValue(this.clearValue, { emitEvent: false });
       }
     });
   }

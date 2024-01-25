@@ -15,7 +15,7 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
   public value = '';
   private changed: (value: any) => void;
   public touched: () => void;
-  public disabled: boolean = false;
+  // public disabled: boolean = false;
 
   writeValue(value: any): void {
     // debugger;
@@ -70,7 +70,7 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
     this.touched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
+  // setDisabledState?(isDisabled: boolean): void {
+  //   this.disabled = isDisabled;
+  // }
 }

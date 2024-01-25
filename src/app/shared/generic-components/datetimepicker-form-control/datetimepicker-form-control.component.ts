@@ -82,10 +82,11 @@ export class DatetimepickerFormControlComponent extends BaseFormControlComponent
   public clearDate(event: Event) {
 
     event.stopPropagation();
+    event.preventDefault();
 
-    this.formControl.setValue('');
+    this.formControl.patchValue('');
     this.formControl.markAsUntouched();
-    this.formControl.setErrors({ required: true });
+    // this.formControl.setErrors({ required: true });
     this.formControl.updateValueAndValidity();
   }
 }

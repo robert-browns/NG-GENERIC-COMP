@@ -7,14 +7,12 @@
       [formControl]="formControl" (dateTimeChange)="onChange($event)" (blur)="touched()"
       [matTooltip]="formControl.value" [matTooltipPosition]="TOOLTIP_POSITION" [required]="uiConfig.isRequired"
       value="{{formControl.value | date: 'dd-MM-yyyy hh:mm:ss a'}}">
-    <!-- <input matInput type="text" value="{{formControl.value | date: 'dd-MMM-yyyy HH:MM:SS'}}"
-      [matTooltip]="formControl.value" [matTooltipPosition]="TOOLTIP_POSITION"> -->
 
-    <button mat-icon-button matSuffix (click)="clearDate($event)">
+    <button mat-icon-button matSuffix (click)="clearDate($event)" type="button">
       <mat-icon>clear</mat-icon>
     </button>
 
-    <owl-date-time #dt1 [hour12Timer]="uiConfig.hour12Timer"></owl-date-time>
+    <owl-date-time #dt1 [hour12Timer]=" uiConfig.hour12Timer"></owl-date-time>
 
     <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
   </mat-form-field>

@@ -13,11 +13,18 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
   dropdownControls: FormControl[] = [];
   matForm2: FormGroup;
 
-  states = [
-    { id: 'KA', value: 'Karnataka' },
-    { id: 'BH', value: 'Bihar' },
-    { id: 'GA', value: 'Goa' },
-  ];
+  // states = [
+  //   { id: 'KA', value: 'Karnataka' },
+  //   { id: 'BH', value: 'Bihar' },
+  //   { id: 'GA', value: 'Goa' },
+  // ];
+  // states = [
+  //   { Id: '1', Name: 'Karnataka' },
+  //   { Id: '2', Name: 'Bihar' },
+  //   { Id: '3', Name: 'Goa' },
+  // ];
+
+  states = [];
 
   // meals ={
   //   {value: }
@@ -34,29 +41,32 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
   // ];
 
   products = [
-    { id: 119, value: 'Burger' },
-    { id: 120, value: 'Pizza' },
-    { id: 121, value: 'Sandwich' },
+    { Id: 119, Name: 'Burger' },
+    { Id: 120, Name: 'Pizza' },
+    { Id: 121, Name: 'Sandwich' },
   ];
 
   categories = [
-    { id: 11, value: 'FNB' },
-    { id: 12, value: 'Beverages' },
+    { Id: 11, Name: 'FNB' },
+    { Id: 12, Name: 'Beverages' },
   ];
 
   productGroups = [
-    { id: 45, value: 'Foods' },
-    { id: 46, value: 'Drinks' },
+    { Id: 45, Name: 'Foods' },
+    { Id: 46, Name: 'Drinks' },
   ];
 
   initForm() {
+
+    let stateId = 1;
 
     this.matForm2 = this.matForm2Builder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      state: ['KA', Validators.required],
+      // state: ['KA', Validators.required],
+      state: [stateId.toString(), Validators.required],
       dob: ['', Validators.required],
       adob: ['', Validators.required],
       dobT: ['', Validators.required],
