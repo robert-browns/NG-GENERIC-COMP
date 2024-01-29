@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, forwardRef } from '@angular/core';
 import { BaseFormControlComponent } from '../base-form-control/base-form-control.component';
 import { FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
 import { debounceTime, map } from 'rxjs/operators';
 
-import { UIConfig, ErrorTypeConfig, SelectOption } from '../Models/generic-components.model';
+import { UIConfig, SelectOption } from '../Models/generic-components.model';
 import { GenericComponentsService } from '../serivces/generic-components.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -25,7 +26,7 @@ import { GenericComponentsService } from '../serivces/generic-components.service
     },
   ],
 })
-export class DropdownFormControlComponent extends BaseFormControlComponent implements OnInit {
+export class DropdownFormControlComponent extends BaseFormControlComponent implements OnInit, OnDestroy {
 
   @Input() formControl: FormControl = new FormControl();
   @Input() public fieldName: string;
@@ -33,14 +34,10 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   @Input() hintLabel: string = "label";
 
   @Input() options: SelectOption[] = [];
-  filteredOptions: SelectOption[] = [];
+  private originalOptions: SelectOption[] = [];
   searchControl = new FormControl();
 
-  //UI config options
-  // @Input() overrideKeyValue: boolean = false;
-  // @Input() enableSearch: boolean = false;
-  // @Input() showHintLabel: boolean = true;
-  // @Input() isRequired: boolean = false;
+  private dropdownValueChangesSubscription: Subscription;
 
   defaultOverrideKeyValue: boolean = false;
   defaultEnableSearch: boolean = false;
@@ -60,7 +57,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   }
 
   ngOnInit(): void {
-    debugger;
+
     const defaultUIConfig: UIConfig = {
       showHintLabel: true,
       overrideKeyValue: false,
@@ -70,29 +67,52 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
 
     this.uiConfig = this.genericCompService.setDefaultValueForConfigs(this.uiConfig, defaultUIConfig);
 
-    this.filteredOptions = this.options;
-
-    if (this.filteredOptions.length === 0) {
-      this.filteredOptions = [{ Id: "-1", Name: "<Select>" }]
+    if (this.options === undefined || this.options.length === 0) {
+      this.options = [{ Id: "-1", Name: "<Select>" }]
     }
+    else {
+      this.originalOptions = [...this.options];
+      this.setupDropdownSearch(this.originalOptions);
+    }
+  }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.handleOptionsChange()
+  }
+
+  ngOnDestroy(): void {
+    this.dropdownValueChangesSubscription.unsubscribe();
+  }
+
+  private handleOptionsChange(): void {
+    if (this.options && this.options.length > 0) {
+      this.originalOptions = [...this.options];
+
+      this.setupDropdownSearch(this.originalOptions);
+    }
+  }
+
+  private setupDropdownSearch(originalOptions: SelectOption[]) {
     if (this.uiConfig.enableSearch) {
-      // Subscribe to changes in the search control to update the filtered list
-      this.searchControl.valueChanges
+      this.dropdownValueChangesSubscription = this.searchControl.valueChanges
         .pipe(
           debounceTime(300),
-          map(value => value.toLowerCase()),
+          map(value => value.toLowerCase())
         )
         .subscribe(value => {
-          this.filteredOptions = this.filterOptions(value);
+          this.options = this.filterOptions(value, originalOptions);
         });
     } else {
       this.searchControl.disable();
     }
   }
 
-  filterOptions(value: string): SelectOption[] {
-    return this.options.filter(option =>
+  private filterOptions(value: string, originalOptions: SelectOption[]): SelectOption[] {
+    if (value === '' || value === null) {
+      return originalOptions;
+    }
+
+    return originalOptions.filter(option =>
       option.Name.toLowerCase().includes(value.toLowerCase())
     );
   }
@@ -105,7 +125,6 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   }
 
   public onChange(event: MatSelectChange) {
-    // debugger;
     let val: string;
     val = event.value;
 
@@ -113,12 +132,7 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   }
 
   getOptionValue(option: SelectOption) {
-    return option.Name === this.filteredOptions[0].Name ? '' : option.Name;
+    return option.Name === this.options[0].Name ? '' : option.Name;
   }
-
-  //explicitly set value in case of dropdown-group
-  // setControlValue(value: any) {
-  //   this.formControl.patchValue(value, { emitEvent: false });
-  // }
 
 }

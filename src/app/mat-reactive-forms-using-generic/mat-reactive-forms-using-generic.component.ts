@@ -13,18 +13,18 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
   dropdownControls: FormControl[] = [];
   matForm2: FormGroup;
 
+  states: any;
+
   // states = [
   //   { id: 'KA', value: 'Karnataka' },
   //   { id: 'BH', value: 'Bihar' },
   //   { id: 'GA', value: 'Goa' },
   // ];
-  // states = [
-  //   { Id: '1', Name: 'Karnataka' },
-  //   { Id: '2', Name: 'Bihar' },
-  //   { Id: '3', Name: 'Goa' },
-  // ];
 
-  states = [];
+
+
+
+  // states = [];
 
   // meals ={
   //   {value: }
@@ -90,6 +90,15 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+
+    setTimeout(() => {
+      this.states = [
+        { Id: '1', Name: 'Karnataka' },
+        { Id: '2', Name: 'Bihar' },
+        { Id: '3', Name: 'Goa' },
+      ];
+      console.log("done!");
+    }, 2000);
   }
 
   onMatSubmit() {

@@ -8,10 +8,10 @@
         noEntriesFoundLabel="No Records Found!"></ngx-mat-select-search>
     </span>
     <span *ngIf="!uiConfig.overrideKeyValue">
-      <mat-option *ngFor="let option of filteredOptions" [value]="option.Id">{{ option.Name
+      <mat-option *ngFor="let option of options" [value]="option.Id">{{ option.Name
         }}</mat-option></span>
     <span *ngIf="uiConfig.overrideKeyValue">
-      <mat-option *ngFor="let option of filteredOptions" [value]="getOptionValue(option)">
+      <mat-option *ngFor="let option of options" [value]="getOptionValue(option)">
         {{ option.Name }}
       </mat-option>
     </span>
