@@ -26,7 +26,7 @@ import { Subscription } from 'rxjs';
     },
   ],
 })
-export class DropdownFormControlComponent extends BaseFormControlComponent implements OnInit, OnDestroy {
+export class DropdownFormControlComponent extends BaseFormControlComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() formControl: FormControl = new FormControl();
   @Input() public fieldName: string;
@@ -36,6 +36,8 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
   @Input() options: SelectOption[] = [];
   private originalOptions: SelectOption[] = [];
   searchControl = new FormControl();
+
+  @Input() formControlName: string;
 
   private dropdownValueChangesSubscription: Subscription;
 

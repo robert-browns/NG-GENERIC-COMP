@@ -1,6 +1,6 @@
 <mat-form-field [hintLabel]="uiConfig.showHintLabel ? hintLabel : ''" appearance="outline"> <!-- legacy -->
   <mat-label>{{hintLabel}}</mat-label>
-  <input matInput #input [attr.maxlength]="maxlength" [placeholder]="placeholder" [value]="value" [type]="fieldType"
+  <input matInput #input [attr.maxlength]="maxlength" [placeholder]="placeholder" [type]="fieldType"
     (input)="onChange($event)" (blur)="touched()" [formControl]="formControl" [required]="uiConfig.isRequired"
     [matTooltip]="formControl.value" [matTooltipDisabled]="fieldType === 'password'"
     [matTooltipPosition]="TOOLTIP_POSITION">

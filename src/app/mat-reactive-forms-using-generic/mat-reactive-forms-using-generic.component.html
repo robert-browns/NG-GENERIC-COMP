@@ -77,23 +77,26 @@
         <smnx-checkbox-form-control label="Married?"
           [formControl]="matForm2.get('married')"></smnx-checkbox-form-control>
       </div>
-      <smnx-dropdowngroup-form-control>
+      <smnx-dropdowngroup-form-control [dependencyConfig]="fnbDropdownGroupDependencyConfig">
         <div>
           <smnx-dropdown-form-control [options]="products" [placeholder]="'Select an option'" [hintLabel]="'Products'"
             [fieldName]="'Products'" [formControl]="matForm2.get('ProductId')"
-            [uiConfig]="{ enableSearch: true, overrideKeyValue: false }"></smnx-dropdown-form-control>
+            [uiConfig]="{ enableSearch: true, overrideKeyValue: false }"
+            formControlName="ProductId"></smnx-dropdown-form-control>
         </div>
 
         <div>
           <smnx-dropdown-form-control [options]="categories" [placeholder]="'Select an option'" [hintLabel]="'Category'"
             [fieldName]="'Category'" [formControl]="matForm2.get('CategoryId')"
-            [uiConfig]="{ enableSearch: true, overrideKeyValue: false }"></smnx-dropdown-form-control>
+            [uiConfig]="{ enableSearch: true, overrideKeyValue: false }"
+            formControlName="CategoryId"></smnx-dropdown-form-control>
         </div>
 
         <div>
           <smnx-dropdown-form-control [options]="productGroups" [placeholder]="'Select an option'"
             [hintLabel]="'ProductGroup'" [fieldName]="'ProductGroup'" [formControl]="matForm2.get('ProductGroupId')"
-            [uiConfig]="{ enableSearch: true, overrideKeyValue: false }"></smnx-dropdown-form-control>
+            [uiConfig]="{ enableSearch: true, overrideKeyValue: false }"
+            formControlName="ProductGroupId"></smnx-dropdown-form-control>
         </div>
       </smnx-dropdowngroup-form-control>
       <div>

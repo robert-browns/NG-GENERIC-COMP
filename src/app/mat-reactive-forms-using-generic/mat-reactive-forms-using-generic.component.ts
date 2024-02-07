@@ -56,6 +56,12 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
     { Id: 46, Name: 'Drinks' },
   ];
 
+  fnbDropdownGroupDependencyConfig: Record<string, string[]> = {
+    "ProductId": ["ProductGroupId"],
+    "CategoryId": ["ProductGroupId", "ProductId"],
+    "ProductGroupId": [],
+  }
+
   initForm() {
 
     let stateId = 1;
@@ -105,6 +111,8 @@ export class MatReactiveFormsUsingGenericComponent implements OnInit {
     console.log(this.matForm2.value);
 
     document.getElementById('matResult').innerText = JSON.stringify(this.matForm2.value, null, 2);
+
+    console.log(this.matForm2.get("firstName").value);
   }
 
   changeFn(event: Event) {

@@ -15,6 +15,8 @@ export class DropdowngroupFormControlComponent implements AfterContentInit, OnDe
 
   @ContentChildren(DropdownFormControlComponent) dropdownFormControlList: QueryList<DropdownFormControlComponent>;
 
+  @Input() dependencyConfig: Record<string, string[]> = {};
+
   private destroy$ = new Subject<void>();
 
   constructor() { }
@@ -51,23 +53,69 @@ export class DropdowngroupFormControlComponent implements AfterContentInit, OnDe
 
   private setupDropdownSubscriptions() {
     // debugger;
-    const dropdownFormControls: FormControl[] = this.dropdownFormControlList.map(dropdown => dropdown.formControl);
+    // const dropdownFormControls: FormControl[] = this.dropdownFormControlList.map(dropdown => dropdown.formControl);
 
-    dropdownFormControls.forEach((formControl, index) => {
-      formControl.valueChanges
+    // dropdownFormControls.forEach((formControl, index) => {
+    //   formControl.valueChanges
+    //     .pipe(takeUntil(this.destroy$))
+    //     .subscribe(selectedValue => this.handleDropdownChange(selectedValue, index));
+    // });
+
+    this.dropdownFormControlList.forEach((dropdown) => {
+      dropdown.formControl.valueChanges
         .pipe(takeUntil(this.destroy$))
-        .subscribe(selectedValue => this.handleDropdownChange(selectedValue, index));
+        .subscribe(() => this.handleDropdownChange(dropdown.formControlName));
     });
   }
 
-  handleDropdownChange(selectedValue: any, currentIndex: number) {
+  handleDropdownChange(currentDropdownName: string) {
     // debugger;
-    // Clear and set -1 for other dropdowns
-    this.dropdownFormControlList.forEach((control, index) => {
-      if (index !== currentIndex) {
-        control.formControl.patchValue(this.clearValue, { emitEvent: false });
-      }
-    });
+    //get the currentIndex control details
+    // const currentDropdownName = this.dropdownFormControlList.toArray()[currentIndex].uniqueFormControlId;
+    // console.log("currentIndex formControls: ", currentDropdownName);
+
+    // const dependentDropdowns = this.dependencyConfig[currentDropdownName];
+
+    // // Clear and set -1 for other dropdowns
+    // // this.dropdownFormControlList.forEach((control, index) => {
+    // //   console.log("control uniqueFormControlId:", control.uniqueFormControlId);
+    // //   if (index !== currentIndex) {
+    // //     control.formControl.patchValue(this.clearValue, { emitEvent: false });
+    // //   }
+    // // });
+
+    // if (dependentDropdowns) {
+    //   // Clear dependent dropdowns
+    //   this.dropdownFormControlList.forEach((control, index) => {
+    //     const formControlName = control.uniqueFormControlId;
+    //     if (index !== currentIndex && dependentDropdowns.includes(formControlName)) {
+    //       control.formControl.patchValue(this.clearValue, { emitEvent: false });
+    //     }
+    //   });
+    // }
+
+    if (this.dependencyConfig === undefined) {
+      this.dependencyConfig = {};
+    }
+
+    const dependentDropdowns = this.dependencyConfig[currentDropdownName];
+
+    if (dependentDropdowns) {
+      this.dropdownFormControlList.forEach((control) => {
+        const formControlName = control.formControlName;
+        if (formControlName !== currentDropdownName && dependentDropdowns.includes(formControlName)) {
+          control.formControl.patchValue(this.clearValue, { emitEvent: false });
+        }
+      });
+    }
+    else {
+      this.dropdownFormControlList.forEach((control) => {
+        const formControlName = control.formControlName;
+        if (formControlName !== currentDropdownName) {
+          control.formControl.patchValue(this.clearValue, { emitEvent: false });
+        }
+      });
+    }
   }
 
 }
