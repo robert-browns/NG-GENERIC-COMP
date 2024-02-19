@@ -12,13 +12,14 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
   // abstract registerOnTouched(fn: any): void;
   // abstract setDisabledState?(isDisabled: boolean): void;
 
-  public value = '';
-  private changed: (value: any) => void;
-  public touched: () => void;
+  abstract transformEventData(event: any): any;
+
+  value = '';
+  onChange: (value: any) => void;
+  onTouch: () => void;
   // public disabled: boolean = false;
 
   writeValue(value: any): void {
-    // debugger;
     if (value === null) return;
     this.value = value;
   }
@@ -50,24 +51,27 @@ export abstract class BaseFormControlComponent implements ControlValueAccessor {
   //   this.changed(val);
   // }
 
-  public onChange(event: any) {
-    // debugger;
-    let val: string;
-    val = (event.target as HTMLInputElement).value;
+  // public onChange(event: any) {
+  //   // debugger;
+  //   let val: string;
+  //   val = (event.target as HTMLInputElement).value;
 
-    this.setChangedFn(val);
-  }
+  //   this.setChangedFn(val);
+  // }
+  // public onChange(eventData: any) {
+  //   this.changed(eventData);
+  // }
 
-  public setChangedFn(eventData: any) {
-    this.changed(eventData);
-  }
+  // public setChangedFn(eventData: any) {
+  //   this.changed(eventData);
+  // }
 
   registerOnChange(fn: any): void {
-    this.changed = fn;
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-    this.touched = fn;
+    this.onTouch = fn;
   }
 
   // setDisabledState?(isDisabled: boolean): void {

@@ -15,13 +15,20 @@ import { BaseFormControlComponent } from '../base-form-control/base-form-control
 })
 export class CheckboxFormControlComponent extends BaseFormControlComponent {
 
+
   @Input() formControl: FormControl = new FormControl();
   @Input() label: string = 'label';
-  public onChange(event: Event) {
+  // public onChange(event: Event) {
+  //   let val: boolean;
+  //   val = (event.target as HTMLInputElement).checked;
+
+  //   this.setChangedFn(val);
+  // }
+
+  transformEventData(event: any): boolean {
     let val: boolean;
     val = (event.target as HTMLInputElement).checked;
-
-    this.setChangedFn(val);
+    return val;
   }
 
 }

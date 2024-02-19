@@ -28,6 +28,7 @@ import { Subscription } from 'rxjs';
 })
 export class DropdownFormControlComponent extends BaseFormControlComponent implements OnInit, OnChanges, OnDestroy {
 
+
   @Input() formControl: FormControl = new FormControl();
   @Input() public fieldName: string;
   @Input() placeholder: string = "placeholder";
@@ -126,11 +127,16 @@ export class DropdownFormControlComponent extends BaseFormControlComponent imple
     }
   }
 
-  public onChange(event: MatSelectChange) {
-    let val: string;
-    val = event.value;
+  // public onChange(event: MatSelectChange) {
+  //   let val: string;
+  //   val = event.value;
 
-    this.setChangedFn(val);
+  //   this.setChangedFn(val);
+  // }
+
+  transformEventData(event: MatSelectChange): string {
+    let val: string = event.value;
+    return val;
   }
 
   getOptionValue(option: SelectOption) {

@@ -69,4 +69,9 @@ export class TextboxFormControlComponent extends BaseFormControlComponent implem
     return this.errorMessage;
   }
 
+  transformEventData(event: any): string {
+    let val: string = (event.target as HTMLInputElement).value;
+    return val;
+  }
+
 }

@@ -19,7 +19,7 @@
     <mat-icon matPrefix class="mat-icon">event</mat-icon>
 
     <input matInput readonly [matDatepicker]="picker" [placeholder]="placeholder" [formControl]="formControl"
-      [required]="uiConfig.isRequired" (dateChange)="onChange($event)" (blur)="touched()"
+      [required]="uiConfig.isRequired" (dateChange)="onChange(transformEventData($event))" (blur)="onTouch()"
       [matTooltip]="formControl.value" [matTooltipPosition]="TOOLTIP_POSITION" style="display: none;">
     <input matInput readonly type="text" value="{{formControl.value | date: 'dd-MMM-yyyy'}}"
       [matTooltip]="formControl.value" [matTooltipPosition]="TOOLTIP_POSITION">

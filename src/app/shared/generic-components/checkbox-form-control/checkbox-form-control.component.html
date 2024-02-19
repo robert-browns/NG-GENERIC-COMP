@@ -1,1 +1,2 @@
-<mat-checkbox [formControl]="formControl" (input)="onChange($event)" (blur)="touched()">{{label}}</mat-checkbox>
+<mat-checkbox [formControl]="formControl" (input)="onChange(transformEventData($event))"
+    (blur)="onTouch()">{{label}}</mat-checkbox>

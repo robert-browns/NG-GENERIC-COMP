@@ -24,6 +24,7 @@ import { GenericComponentsService } from '../serivces/generic-components.service
 export class DatepickerFormControlComponent extends BaseFormControlComponent implements OnInit {
 
 
+
   @Input() formControl: FormControl = new FormControl();
   @Input() fieldName: string;
   @Input() placeholder: string = 'placeholder';
@@ -65,7 +66,20 @@ export class DatepickerFormControlComponent extends BaseFormControlComponent imp
   }
 
 
-  public onChange(event: any) {
+  // public onChange(event: any) {
+  //   const selectedDate = event.value === '' ? '' : event.value.toLocaleString();
+
+  //   //for datepicker onChange itself marks it as touched, and clears errors when a date is selected.
+  //   if (selectedDate) {
+  //     this.formControl.markAsTouched();
+  //     this.formControl.setErrors(null);
+  //     this.formControl.updateValueAndValidity();
+  //   }
+
+  //   this.setChangedFn(selectedDate);
+  // }
+
+  transformEventData(event: any) {
     const selectedDate = event.value === '' ? '' : event.value.toLocaleString();
 
     //for datepicker onChange itself marks it as touched, and clears errors when a date is selected.
@@ -75,7 +89,7 @@ export class DatepickerFormControlComponent extends BaseFormControlComponent imp
       this.formControl.updateValueAndValidity();
     }
 
-    this.setChangedFn(selectedDate);
+    return selectedDate;
   }
 
   public clearDate(event: Event) {

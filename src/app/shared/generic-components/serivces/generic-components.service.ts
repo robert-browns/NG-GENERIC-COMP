@@ -11,7 +11,7 @@ export class GenericComponentsService {
   constructor() { }
 
   VerifyPatterType(patternType: any, localizedData: any): any {
-    debugger;
+    // debugger;
     switch (patternType) {
       case this.patternTypes.ONLYTEXT: return this.isEmptyOrDefault(localizedData['1752'], 'Special Characters/Numbers not allowed');
       case this.patternTypes.ONLYNUMERIC: return this.isEmptyOrDefault(localizedData['1753'], 'Only numbers');
